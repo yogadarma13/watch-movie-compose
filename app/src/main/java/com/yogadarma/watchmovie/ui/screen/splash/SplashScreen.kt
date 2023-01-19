@@ -38,9 +38,7 @@ fun SplashScreen(
         LaunchedEffect(true) {
             delay(3000)
             navController.popBackStack()
-            navController.navigate(Screen.Home.route) {
-                popUpTo(navController.graph.findStartDestination().id)
-            }
+            navController.navigate(Screen.Home.route)
         }
     }
 }

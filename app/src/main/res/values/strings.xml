@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Watch Movie</string>
     <string name="icon_splash_description">Icon Application</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_profile">Profile</string>
 </resources>

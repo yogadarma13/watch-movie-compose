@@ -1,4 +1,4 @@
-package com.yogadarma.watchmovie.ui.screen.home
+package com.yogadarma.watchmovie.ui.screen.favorite
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,21 +10,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
-fun HomeScreen(
+fun FavoriteScreen(
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Home")
+        Text(text = "Favorite")
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
+fun FavoriteScreenPreview() {
     WatchMovieTheme {
-        HomeScreen()
+        FavoriteScreen()
     }
 }

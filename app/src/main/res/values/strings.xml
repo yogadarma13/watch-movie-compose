@@ -4,4 +4,7 @@
     <string name="title_movie">Movie</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_profile">Profile</string>
+    <string name="back_button_description">Back button</string>
+    <string name="movie_poster_description">Movie poster</string>
+    <string name="label_synopsis">Synopsis</string>
 </resources>

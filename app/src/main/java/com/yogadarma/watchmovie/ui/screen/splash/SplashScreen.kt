@@ -13,16 +13,13 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 import com.yogadarma.watchmovie.R
-import com.yogadarma.watchmovie.ui.screen.navigation.Screen
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    navigateToHome: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
@@ -37,8 +34,7 @@ fun SplashScreen(
         )
         LaunchedEffect(true) {
             delay(3000)
-            navController.popBackStack()
-            navController.navigate(Screen.Home.route)
+            navigateToHome()
         }
     }
 }

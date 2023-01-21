@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.yogadarma.watchmovie.ui.screen.detail.DetailScreen
 import com.yogadarma.watchmovie.ui.screen.favorite.FavoriteScreen
 import com.yogadarma.watchmovie.ui.screen.home.HomeScreen
 import com.yogadarma.watchmovie.ui.screen.navigation.NavigationItem
@@ -37,8 +38,10 @@ fun WatchMovieApp(
 
     Scaffold(
         bottomBar = {
-            if (currentRoute != Screen.Splash.route) {
-                BottomNavigationBar(navController = navController)
+            when (currentRoute) {
+                Screen.Home.route, Screen.Favorite.route, Screen.Profile.route -> {
+                    BottomNavigationBar(navController = navController)
+                }
             }
         },
         modifier = modifier
@@ -49,16 +52,24 @@ fun WatchMovieApp(
             modifier = Modifier.padding(it)
         ) {
             composable(Screen.Splash.route) {
-                SplashScreen(navController = navController)
+                SplashScreen(navigateToHome = {
+                    navController.popBackStack()
+                    navController.navigate(Screen.Home.route)
+                })
             }
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(navigateToDetail = {
+                    navController.navigate(Screen.Detail.route)
+                })
             }
             composable(Screen.Favorite.route) {
                 FavoriteScreen()
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()
+            }
+            composable(Screen.Detail.route) {
+                DetailScreen()
             }
         }
     }

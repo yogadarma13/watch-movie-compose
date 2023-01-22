@@ -1,7 +1,7 @@
 package com.yogadarma.core.di
 
 import com.yogadarma.core.BuildConfig
-import com.yogadarma.core.data.source.network.ApiService
+import com.yogadarma.core.data.source.remote.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -19,6 +19,8 @@ android {
         consumerProguardFiles "consumer-rules.pro"
 
         buildConfigField 'String', 'BASE_URL', '"https://api.themoviedb.org/3/"'
+        buildConfigField 'String', 'API_KEY', '"c4419b53161aa5ce9706b6c909cb6775"'
+        buildConfigField 'String', 'ENDPOINT_POPULAR_MOVIE', '"movie/popular"'
     }
 
     buildTypes {

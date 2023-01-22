@@ -9,4 +9,6 @@ import javax.inject.Singleton
 class AppRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : AppRepository {
+
+    override fun getPopularMovie() = remoteDataSource.getPopularMovie()
 }

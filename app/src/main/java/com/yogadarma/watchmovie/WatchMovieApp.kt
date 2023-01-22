@@ -58,9 +58,9 @@ fun WatchMovieApp(
                 })
             }
             composable(Screen.Home.route) {
-                HomeScreen(navigateToDetail = {
-                    navController.navigate(Screen.Detail.route)
-                })
+                HomeScreen(
+                    navigateToDetail = { navController.navigate(Screen.Detail.route) }
+                )
             }
             composable(Screen.Favorite.route) {
                 FavoriteScreen()

@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yogadarma.core.data.source.remote.model.MovieResponse
 import com.yogadarma.watchmovie.common.UiState
+import com.yogadarma.watchmovie.ui.component.CircularProgress
+import com.yogadarma.watchmovie.ui.component.ErrorContent
 import com.yogadarma.watchmovie.ui.component.ItemMovieGrid
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
@@ -27,6 +29,7 @@ fun HomeScreen(
         when (state) {
             is UiState.Loading -> {
                 viewModel.getPopularMovie()
+                CircularProgress()
             }
             is UiState.Success -> {
                 HomeContent(
@@ -36,7 +39,7 @@ fun HomeScreen(
                 )
             }
             is UiState.Error -> {
-
+                ErrorContent(errorMessage = state.errorMessage)
             }
         }
     }

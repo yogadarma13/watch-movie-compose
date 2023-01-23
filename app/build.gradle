@@ -66,6 +66,7 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose_version"
     implementation "io.coil-kt:coil-compose:$coil_compose_version"
     implementation "joda-time:joda-time:$joda_time_version"
+    implementation "com.google.code.gson:gson:$gson_version"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"

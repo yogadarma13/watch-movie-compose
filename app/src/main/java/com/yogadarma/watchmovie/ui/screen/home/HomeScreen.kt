@@ -23,7 +23,7 @@ import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateToDetail: () -> Unit = {}
+    navigateToDetail: (MovieResponse) -> Unit = {}
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { state ->
         when (state) {
@@ -49,7 +49,7 @@ fun HomeScreen(
 fun HomeContent(
     modifier: Modifier = Modifier,
     movies: List<MovieResponse>,
-    navigateToDetail: () -> Unit
+    navigateToDetail: (MovieResponse) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -59,7 +59,7 @@ fun HomeContent(
                 modifier = Modifier.clickable(
                     interactionSource = interactionSource,
                     indication = null
-                ) { navigateToDetail() },
+                ) { navigateToDetail(data) },
                 image = data.posterPath.orEmpty(),
                 title = data.originalTitle.orEmpty(),
                 releaseDate = data.releaseDate.orEmpty()

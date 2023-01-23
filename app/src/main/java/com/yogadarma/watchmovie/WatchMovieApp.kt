@@ -1,5 +1,7 @@
 package com.yogadarma.watchmovie
 
+import android.net.Uri
+import android.os.Build
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -18,9 +20,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.google.gson.Gson
+import com.yogadarma.core.data.source.remote.model.MovieResponse
 import com.yogadarma.watchmovie.ui.screen.detail.DetailScreen
 import com.yogadarma.watchmovie.ui.screen.favorite.FavoriteScreen
 import com.yogadarma.watchmovie.ui.screen.home.HomeScreen
+import com.yogadarma.watchmovie.ui.screen.navigation.MovieNavType
 import com.yogadarma.watchmovie.ui.screen.navigation.NavigationItem
 import com.yogadarma.watchmovie.ui.screen.navigation.Screen
 import com.yogadarma.watchmovie.ui.screen.profile.ProfileScreen
@@ -59,7 +65,11 @@ fun WatchMovieApp(
             }
             composable(Screen.Home.route) {
                 HomeScreen(
-                    navigateToDetail = { navController.navigate(Screen.Detail.route) }
+                    navigateToDetail = { movie ->
+                        navController.navigate(
+                            Screen.Detail.createRoute(Uri.encode(Gson().toJson(movie)))
+                        )
+                    }
                 )
             }
             composable(Screen.Favorite.route) {
@@ -68,8 +78,21 @@ fun WatchMovieApp(
             composable(Screen.Profile.route) {
                 ProfileScreen()
             }
-            composable(Screen.Detail.route) {
-                DetailScreen()
+            composable(
+                route = Screen.Detail.route,
+                arguments = listOf(
+                    navArgument("movie") {
+                        type = MovieNavType
+                    }
+                )
+            ) { backStackEntry ->
+                val movie = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    backStackEntry.arguments?.getParcelable("movie", MovieResponse::class.java)
+                } else {
+                    backStackEntry.arguments?.getParcelable("movie")
+                }
+
+                DetailScreen(movie = movie)
             }
         }
     }

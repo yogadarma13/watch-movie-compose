@@ -1,5 +1,6 @@
 package com.yogadarma.watchmovie.ui.screen.detail
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -17,13 +18,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.yogadarma.core.data.source.remote.model.MovieResponse
 import com.yogadarma.watchmovie.R
 import com.yogadarma.watchmovie.ui.component.SectionDetailMovie
 import com.yogadarma.watchmovie.ui.component.SectionPosterMovie
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
-fun DetailScreen(modifier: Modifier = Modifier) {
+fun DetailScreen(modifier: Modifier = Modifier, movie: MovieResponse? = null) {
     Box(
         modifier = modifier
             .fillMaxSize()

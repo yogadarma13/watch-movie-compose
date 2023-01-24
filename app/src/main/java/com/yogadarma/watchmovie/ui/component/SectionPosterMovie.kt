@@ -1,6 +1,5 @@
 package com.yogadarma.watchmovie.ui.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -14,23 +13,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.yogadarma.watchmovie.BuildConfig
 import com.yogadarma.watchmovie.R
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
-fun SectionPosterMovie(modifier: Modifier = Modifier) {
+fun SectionPosterMovie(modifier: Modifier = Modifier, image: String, title: String) {
     Box(modifier = modifier, contentAlignment = Alignment.BottomStart) {
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(0.75f),
-            painter = painterResource(id = R.drawable.ic_launcher_background),
+            model = "${BuildConfig.BASE_IMAGE_URL}$image",
             contentDescription = stringResource(id = R.string.movie_poster_description),
             contentScale = ContentScale.Crop
         )
@@ -48,7 +48,7 @@ fun SectionPosterMovie(modifier: Modifier = Modifier) {
                 )
         )
         Text(
-            text = "Naruto",
+            text = title,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
@@ -65,6 +65,6 @@ fun SectionPosterMovie(modifier: Modifier = Modifier) {
 @Composable
 fun SectionPosterMoviePreview() {
     WatchMovieTheme {
-        SectionPosterMovie()
+        SectionPosterMovie(image = "", title = "")
     }
 }

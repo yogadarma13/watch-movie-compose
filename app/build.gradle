@@ -26,6 +26,7 @@ android {
         buildConfigField 'String', 'BASE_IMAGE_URL', '"https://image.tmdb.org/t/p/w500"'
         buildConfigField 'String', 'FORMAT_DATE1', '"yyyy-mm-dd"'
         buildConfigField 'String', 'FORMAT_DATE2', '"d MMM yyyy"'
+        buildConfigField 'String', 'FORMAT_DATE3', '"dd MMMM yyyy"'
     }
 
     buildTypes {

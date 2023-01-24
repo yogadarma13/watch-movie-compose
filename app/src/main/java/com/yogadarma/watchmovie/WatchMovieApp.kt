@@ -92,7 +92,12 @@ fun WatchMovieApp(
                     backStackEntry.arguments?.getParcelable("movie")
                 }
 
-                DetailScreen(movie = movie)
+                DetailScreen(
+                    movie = movie,
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
             }
         }
     }

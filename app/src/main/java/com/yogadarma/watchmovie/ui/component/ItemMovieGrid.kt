@@ -27,7 +27,7 @@ fun ItemMovieGrid(
     Column(modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
         AsyncImage(
             model = "${BuildConfig.BASE_IMAGE_URL}$image",
-            contentDescription = null,
+            contentDescription = title,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()

@@ -1,6 +1,5 @@
 package com.yogadarma.watchmovie.ui.screen.detail
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -25,7 +24,11 @@ import com.yogadarma.watchmovie.ui.component.SectionPosterMovie
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
-fun DetailScreen(modifier: Modifier = Modifier, movie: MovieResponse? = null) {
+fun DetailScreen(
+    modifier: Modifier = Modifier,
+    movie: MovieResponse? = null,
+    navigateBack: () -> Unit = {}
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -37,15 +40,23 @@ fun DetailScreen(modifier: Modifier = Modifier, movie: MovieResponse? = null) {
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top
         ) {
-            SectionPosterMovie()
-            SectionDetailMovie()
+            SectionPosterMovie(
+                image = movie?.posterPath.orEmpty(),
+                title = movie?.originalTitle.orEmpty()
+            )
+            SectionDetailMovie(
+                rating = movie?.voteAverage.toString(),
+                releaseDate = movie?.releaseDate.orEmpty(),
+                synopsis = movie?.overview.orEmpty()
+            )
         }
         IconButton(
             modifier = Modifier
                 .padding(16.dp)
                 .background(shape = CircleShape, color = colorResource(id = R.color.white_50))
                 .size(40.dp),
-            onClick = { /*TODO*/ }) {
+            onClick = { navigateBack() }
+        ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = stringResource(id = R.string.back_button_description)

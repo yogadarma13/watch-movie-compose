@@ -1,6 +1,8 @@
 package com.yogadarma.core.di
 
 import com.yogadarma.core.data.AppRepositoryImpl
+import com.yogadarma.core.data.source.local.LocalDataSource
+import com.yogadarma.core.data.source.local.LocalDataSourceImpl
 import com.yogadarma.core.data.source.remote.RemoteDataSource
 import com.yogadarma.core.data.source.remote.RemoteDataSourceImpl
 import com.yogadarma.core.domain.repository.AppRepository
@@ -21,4 +23,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun binsRemoteDataSource(remoteDataSourceImpl: RemoteDataSourceImpl): RemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindsLocalDataSource(localDataSourceImpl: LocalDataSourceImpl): LocalDataSource
 }

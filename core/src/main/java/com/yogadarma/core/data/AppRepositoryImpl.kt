@@ -31,4 +31,11 @@ class AppRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override fun getAllFavoriteMovie(): Flow<List<Movie>> = flow {
+        localDataSource.getAllFavoriteMovie().collect { list ->
+            val result = list.map { it.mapToDomain() }
+            emit(result)
+        }
+    }
 }

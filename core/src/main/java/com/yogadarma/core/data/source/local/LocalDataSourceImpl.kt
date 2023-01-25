@@ -8,4 +8,6 @@ import javax.inject.Singleton
 class LocalDataSourceImpl @Inject constructor(
     private val movieDao: MovieDao
 ) : LocalDataSource {
+
+    override fun getAllFavoriteMovie() = movieDao.getAllFavoriteMovie()
 }

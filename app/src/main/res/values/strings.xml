@@ -8,4 +8,6 @@
     <string name="movie_poster_description">Movie poster</string>
     <string name="label_synopsis">Synopsis</string>
     <string name="error_description">Error</string>
+    <string name="empty_favorite_data">Favorite data is empty</string>
+    <string name="empty_description">Data is empty</string>
 </resources>

@@ -1,37 +1,69 @@
 package com.yogadarma.watchmovie.ui.screen.favorite
 
-import android.util.Log
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.yogadarma.core.domain.model.Movie
+import com.yogadarma.watchmovie.R
 import com.yogadarma.watchmovie.common.UiState
+import com.yogadarma.watchmovie.ui.component.EmptyContent
+import com.yogadarma.watchmovie.ui.component.ItemMovieVertical
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
 fun FavoriteScreen(
     modifier: Modifier = Modifier,
-    viewModel: FavoriteViewModel = hiltViewModel()
+    viewModel: FavoriteViewModel = hiltViewModel(),
+    navigateToDetail: (Movie) -> Unit = {}
 ) {
 
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { state ->
-        when(state) {
+        when (state) {
             is UiState.Loading -> viewModel.getAllFavoriteMovie()
-            is UiState.Success -> Log.d("DATAAAAAA", state.data.toString())
+            is UiState.Success -> {
+                if (state.data.isNotEmpty())
+                    FavoriteContent(
+                        modifier = modifier,
+                        movies = state.data,
+                        navigateToDetail = navigateToDetail
+                    )
+                else
+                    EmptyContent(message = stringResource(id = R.string.empty_favorite_data))
+            }
             else -> {}
         }
     }
+}
 
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+@Composable
+fun FavoriteContent(
+    modifier: Modifier = Modifier,
+    movies: List<Movie>,
+    navigateToDetail: (Movie) -> Unit
+) {
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp)
     ) {
-        Text(text = "Favorite")
+        items(movies) { data ->
+            ItemMovieVertical(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navigateToDetail(data) },
+                image = data.image,
+                title = data.title,
+                releaseDate = data.releaseDate
+            )
+        }
     }
 }
 

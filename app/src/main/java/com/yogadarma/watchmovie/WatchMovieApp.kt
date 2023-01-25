@@ -73,7 +73,13 @@ fun WatchMovieApp(
                 )
             }
             composable(Screen.Favorite.route) {
-                FavoriteScreen()
+                FavoriteScreen(
+                    navigateToDetail = { movie ->
+                        navController.navigate(
+                            Screen.Detail.createRoute(Uri.encode(Gson().toJson(movie)))
+                        )
+                    }
+                )
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()

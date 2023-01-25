@@ -22,7 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.gson.Gson
-import com.yogadarma.core.data.source.remote.model.MovieResponse
+import com.yogadarma.core.domain.model.Movie
 import com.yogadarma.watchmovie.ui.screen.detail.DetailScreen
 import com.yogadarma.watchmovie.ui.screen.favorite.FavoriteScreen
 import com.yogadarma.watchmovie.ui.screen.home.HomeScreen
@@ -87,7 +87,7 @@ fun WatchMovieApp(
                 )
             ) { backStackEntry ->
                 val movie = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    backStackEntry.arguments?.getParcelable("movie", MovieResponse::class.java)
+                    backStackEntry.arguments?.getParcelable("movie", Movie::class.java)
                 } else {
                     backStackEntry.arguments?.getParcelable("movie")
                 }

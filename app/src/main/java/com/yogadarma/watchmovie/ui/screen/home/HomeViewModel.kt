@@ -3,7 +3,7 @@ package com.yogadarma.watchmovie.ui.screen.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yogadarma.core.data.Resource
-import com.yogadarma.core.data.source.remote.model.MovieResponse
+import com.yogadarma.core.domain.model.Movie
 import com.yogadarma.core.domain.usecases.GetPopularMovieUseCase
 import com.yogadarma.watchmovie.common.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,9 +17,9 @@ class HomeViewModel @Inject constructor(
     private val getPopularMovieUseCase: GetPopularMovieUseCase
 ) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<UiState<List<MovieResponse>>> =
+    private val _uiState: MutableStateFlow<UiState<List<Movie>>> =
         MutableStateFlow(UiState.Loading)
-    val uiState: StateFlow<UiState<List<MovieResponse>>>
+    val uiState: StateFlow<UiState<List<Movie>>>
         get() = _uiState
 
     fun getPopularMovie() {

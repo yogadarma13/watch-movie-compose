@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.yogadarma.core.data.source.remote.model.MovieResponse
+import com.yogadarma.core.domain.model.Movie
 import com.yogadarma.watchmovie.R
 import com.yogadarma.watchmovie.ui.component.SectionDetailMovie
 import com.yogadarma.watchmovie.ui.component.SectionPosterMovie
@@ -26,7 +26,7 @@ import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
-    movie: MovieResponse? = null,
+    movie: Movie? = null,
     navigateBack: () -> Unit = {}
 ) {
     Box(
@@ -41,13 +41,13 @@ fun DetailScreen(
             verticalArrangement = Arrangement.Top
         ) {
             SectionPosterMovie(
-                image = movie?.posterPath.orEmpty(),
-                title = movie?.originalTitle.orEmpty()
+                image = movie?.image.orEmpty(),
+                title = movie?.title.orEmpty()
             )
             SectionDetailMovie(
-                rating = movie?.voteAverage.toString(),
+                rating = movie?.rating.toString(),
                 releaseDate = movie?.releaseDate.orEmpty(),
-                synopsis = movie?.overview.orEmpty()
+                synopsis = movie?.synopsis.orEmpty()
             )
         }
         IconButton(

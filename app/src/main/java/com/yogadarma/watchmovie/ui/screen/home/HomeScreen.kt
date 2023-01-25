@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.yogadarma.core.data.source.remote.model.MovieResponse
+import com.yogadarma.core.domain.model.Movie
 import com.yogadarma.watchmovie.common.UiState
 import com.yogadarma.watchmovie.ui.component.CircularProgress
 import com.yogadarma.watchmovie.ui.component.ErrorContent
@@ -23,7 +23,7 @@ import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateToDetail: (MovieResponse) -> Unit = {}
+    navigateToDetail: (Movie) -> Unit = {}
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { state ->
         when (state) {
@@ -48,8 +48,8 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     modifier: Modifier = Modifier,
-    movies: List<MovieResponse>,
-    navigateToDetail: (MovieResponse) -> Unit
+    movies: List<Movie>,
+    navigateToDetail: (Movie) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -60,9 +60,9 @@ fun HomeContent(
                     interactionSource = interactionSource,
                     indication = null
                 ) { navigateToDetail(data) },
-                image = data.posterPath.orEmpty(),
-                title = data.originalTitle.orEmpty(),
-                releaseDate = data.releaseDate.orEmpty()
+                image = data.image,
+                title = data.title,
+                releaseDate = data.releaseDate
             )
         }
     }

@@ -1,15 +1,12 @@
 package com.yogadarma.core.data.source.remote.model
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 data class ListMovieResponse(
     @field:SerializedName("results")
     val results: List<MovieResponse>? = null
 )
 
-@Parcelize
 data class MovieResponse(
 
     @field:SerializedName("overview")
@@ -30,4 +27,4 @@ data class MovieResponse(
     @field:SerializedName("id")
     val id: Int? = null
 
-) : Parcelable
+)

@@ -1,6 +1,7 @@
 package com.yogadarma.core.data.source.local
 
 import com.yogadarma.core.data.source.local.dao.MovieDao
+import com.yogadarma.core.data.source.local.entity.MovieEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -10,4 +11,6 @@ class LocalDataSourceImpl @Inject constructor(
 ) : LocalDataSource {
 
     override fun getAllFavoriteMovie() = movieDao.getAllFavoriteMovie()
+
+    override fun insertFavorite(movieEntity: MovieEntity) = movieDao.insertFavorite(movieEntity)
 }

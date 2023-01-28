@@ -5,6 +5,7 @@ import com.yogadarma.core.data.source.remote.model.MovieResponse
 import com.yogadarma.core.domain.model.Movie
 
 fun MovieResponse.mapToDomain() = Movie(
+    id ?: 0,
     posterPath.orEmpty(),
     originalTitle.orEmpty(),
     overview.orEmpty(),
@@ -13,9 +14,19 @@ fun MovieResponse.mapToDomain() = Movie(
 )
 
 fun MovieEntity.mapToDomain() = Movie(
+    movieId,
     image,
     title,
     synopsis,
     releaseDate,
     rating
+)
+
+fun Movie.mapToEntity() = MovieEntity(
+    movieId = movieId,
+    image = image,
+    title = title,
+    synopsis = synopsis,
+    releaseDate = releaseDate,
+    rating = rating
 )

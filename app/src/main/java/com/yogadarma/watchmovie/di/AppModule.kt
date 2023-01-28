@@ -1,9 +1,6 @@
 package com.yogadarma.watchmovie.di
 
-import com.yogadarma.core.domain.usecases.GetFavoriteImpl
-import com.yogadarma.core.domain.usecases.GetFavoriteUseCase
-import com.yogadarma.core.domain.usecases.GetPopularMovieImpl
-import com.yogadarma.core.domain.usecases.GetPopularMovieUseCase
+import com.yogadarma.core.domain.usecases.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +18,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindsGetFavoriteUseCase(getFavoriteImpl: GetFavoriteImpl): GetFavoriteUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindsInsertFavoriteUseCase(insertFavoriteImpl: InsertFavoriteImpl): InsertFavoriteUseCase
 }

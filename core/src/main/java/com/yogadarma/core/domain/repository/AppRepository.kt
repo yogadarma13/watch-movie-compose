@@ -8,4 +8,6 @@ interface AppRepository {
     fun getPopularMovie(): Flow<Resource<List<Movie>>>
 
     fun getAllFavoriteMovie(): Flow<List<Movie>>
+
+    suspend fun insertFavorite(movie: Movie)
 }

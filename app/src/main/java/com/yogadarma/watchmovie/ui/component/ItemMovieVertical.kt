@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.yogadarma.watchmovie.BuildConfig
+import com.yogadarma.watchmovie.R
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 import com.yogadarma.watchmovie.utils.formatDate
 
@@ -22,6 +23,7 @@ fun ItemMovieVertical(
     modifier: Modifier = Modifier,
     image: String,
     title: String,
+    rating: String,
     releaseDate: String
 ) {
     Row(modifier = modifier.padding(vertical = 8.dp)) {
@@ -49,6 +51,16 @@ fun ItemMovieVertical(
                 ),
             )
             Spacer(modifier = Modifier.height(8.dp))
+            DrawableStartWrapper(
+                drawable = R.drawable.ic_star,
+                drawablePadding = 5.dp
+            ) {
+                Text(
+                    text = rating,
+                    style = MaterialTheme.typography.subtitle1,
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = releaseDate.formatDate(BuildConfig.FORMAT_DATE1, BuildConfig.FORMAT_DATE2),
@@ -64,6 +76,6 @@ fun ItemMovieVertical(
 @Composable
 fun ItemMovieVerticalPreview() {
     WatchMovieTheme {
-        ItemMovieVertical(image = "", title = "Title", releaseDate = "2021-12-12")
+        ItemMovieVertical(image = "", title = "Title", rating = "8.5", releaseDate = "2021-12-12")
     }
 }

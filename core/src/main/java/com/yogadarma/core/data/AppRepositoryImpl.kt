@@ -5,8 +5,11 @@ import com.yogadarma.core.data.source.remote.RemoteDataSource
 import com.yogadarma.core.domain.model.Movie
 import com.yogadarma.core.domain.repository.AppRepository
 import com.yogadarma.core.utils.mapToDomain
+import com.yogadarma.core.utils.mapToEntity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -37,5 +40,9 @@ class AppRepositoryImpl @Inject constructor(
             val result = list.map { it.mapToDomain() }
             emit(result)
         }
+    }
+
+    override suspend fun insertFavorite(movie: Movie) = withContext(Dispatchers.IO) {
+        localDataSource.insertFavorite(movie.mapToEntity())
     }
 }

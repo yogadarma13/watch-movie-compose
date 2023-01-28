@@ -61,6 +61,7 @@ fun FavoriteContent(
                     .clickable { navigateToDetail(data) },
                 image = data.image,
                 title = data.title,
+                rating = data.rating.toString(),
                 releaseDate = data.releaseDate
             )
         }

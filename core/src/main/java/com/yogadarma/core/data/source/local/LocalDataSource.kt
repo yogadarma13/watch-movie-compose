@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface LocalDataSource {
 
     fun getAllFavoriteMovie(): Flow<List<MovieEntity>>
+
+    fun insertFavorite(movieEntity: MovieEntity)
 }

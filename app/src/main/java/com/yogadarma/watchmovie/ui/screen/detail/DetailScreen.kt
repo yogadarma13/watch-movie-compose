@@ -10,8 +10,9 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -32,6 +33,11 @@ fun DetailScreen(
     movie: Movie? = null,
     navigateBack: () -> Unit = {}
 ) {
+    var favorite by remember { mutableStateOf(false) }
+
+    viewModel.favState.collectAsState().value.let { favorite = it }
+    viewModel.checkFavoriteById(movie?.movieId ?: 0)
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -81,7 +87,7 @@ fun DetailScreen(
                 }
             ) {
                 Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
+                    imageVector = if (favorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = stringResource(id = R.string.favorite_button_description)
                 )
             }

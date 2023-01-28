@@ -8,4 +8,6 @@ interface LocalDataSource {
     fun getAllFavoriteMovie(): Flow<List<MovieEntity>>
 
     fun insertFavorite(movieEntity: MovieEntity)
+
+    fun checkFavoriteById(movieId: Int): Int
 }

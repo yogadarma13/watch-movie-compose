@@ -10,4 +10,6 @@ interface AppRepository {
     fun getAllFavoriteMovie(): Flow<List<Movie>>
 
     suspend fun insertFavorite(movie: Movie)
+
+    suspend fun checkFavoriteById(movieId: Int): Int
 }

@@ -15,4 +15,7 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavorite(movieEntity: MovieEntity)
+
+    @Query("SELECT count(*) FROM movie WHERE movieId = :movieId")
+    fun checkFavoriteById(movieId: Int): Int
 }

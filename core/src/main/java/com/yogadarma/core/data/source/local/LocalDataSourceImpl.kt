@@ -13,4 +13,6 @@ class LocalDataSourceImpl @Inject constructor(
     override fun getAllFavoriteMovie() = movieDao.getAllFavoriteMovie()
 
     override fun insertFavorite(movieEntity: MovieEntity) = movieDao.insertFavorite(movieEntity)
+
+    override fun checkFavoriteById(movieId: Int) = movieDao.checkFavoriteById(movieId)
 }

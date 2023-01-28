@@ -22,4 +22,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindsInsertFavoriteUseCase(insertFavoriteImpl: InsertFavoriteImpl): InsertFavoriteUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindsCheckFavoriteUseCase(checkFavoriteImpl: CheckFavoriteImpl): CheckFavoriteUseCase
 }

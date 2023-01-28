@@ -45,4 +45,8 @@ class AppRepositoryImpl @Inject constructor(
     override suspend fun insertFavorite(movie: Movie) = withContext(Dispatchers.IO) {
         localDataSource.insertFavorite(movie.mapToEntity())
     }
+
+    override suspend fun checkFavoriteById(movieId: Int) = withContext(Dispatchers.IO) {
+        localDataSource.checkFavoriteById(movieId)
+    }
 }

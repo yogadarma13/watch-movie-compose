@@ -35,8 +35,13 @@ fun DetailScreen(
 ) {
     var favorite by remember { mutableStateOf(false) }
 
-    viewModel.favState.collectAsState().value.let { favorite = it }
     viewModel.checkFavoriteById(movie?.movieId ?: 0)
+
+    LaunchedEffect(true) {
+        viewModel.favState.collect {
+            favorite = it
+        }
+    }
 
     Box(
         modifier = modifier
@@ -82,7 +87,10 @@ fun DetailScreen(
                     .size(40.dp),
                 onClick = {
                     movie?.let {
-                        viewModel.insertFavorite(it)
+                        if (favorite) viewModel.deleteFavorite(it.movieId)
+                        else viewModel.insertFavorite(it)
+
+                        favorite = !favorite
                     }
                 }
             ) {

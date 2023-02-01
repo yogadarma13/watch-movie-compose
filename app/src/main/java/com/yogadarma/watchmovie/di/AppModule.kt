@@ -26,4 +26,8 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun bindsCheckFavoriteUseCase(checkFavoriteImpl: CheckFavoriteImpl): CheckFavoriteUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindsDeleteFavoriteUseCase(deleteFavoriteImpl: DeleteFavoriteImpl): DeleteFavoriteUseCase
 }

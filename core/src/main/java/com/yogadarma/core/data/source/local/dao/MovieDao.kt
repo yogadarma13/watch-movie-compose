@@ -1,6 +1,7 @@
 package com.yogadarma.core.data.source.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -18,4 +19,7 @@ interface MovieDao {
 
     @Query("SELECT count(*) FROM movie WHERE movieId = :movieId")
     fun checkFavoriteById(movieId: Int): Int
+
+    @Query("DELETE FROM movie WHERE movieId = :movieId")
+    fun deleteFavorite(movieId: Int)
 }

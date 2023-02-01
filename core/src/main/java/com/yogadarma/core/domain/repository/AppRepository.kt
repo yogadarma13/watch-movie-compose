@@ -12,4 +12,6 @@ interface AppRepository {
     suspend fun insertFavorite(movie: Movie)
 
     suspend fun checkFavoriteById(movieId: Int): Int
+
+    suspend fun deleteFavorite(movieId: Int)
 }

@@ -10,4 +10,6 @@ interface LocalDataSource {
     fun insertFavorite(movieEntity: MovieEntity)
 
     fun checkFavoriteById(movieId: Int): Int
+
+    fun deleteFavorite(movieId: Int)
 }

@@ -49,4 +49,8 @@ class AppRepositoryImpl @Inject constructor(
     override suspend fun checkFavoriteById(movieId: Int) = withContext(Dispatchers.IO) {
         localDataSource.checkFavoriteById(movieId)
     }
+
+    override suspend fun deleteFavorite(movieId: Int) = withContext(Dispatchers.IO) {
+        localDataSource.deleteFavorite(movieId)
+    }
 }

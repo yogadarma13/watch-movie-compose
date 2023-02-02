@@ -23,13 +23,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.gson.Gson
 import com.yogadarma.core.domain.model.Movie
+import com.yogadarma.watchmovie.ui.screen.about.AboutScreen
 import com.yogadarma.watchmovie.ui.screen.detail.DetailScreen
 import com.yogadarma.watchmovie.ui.screen.favorite.FavoriteScreen
 import com.yogadarma.watchmovie.ui.screen.home.HomeScreen
 import com.yogadarma.watchmovie.ui.screen.navigation.MovieNavType
 import com.yogadarma.watchmovie.ui.screen.navigation.NavigationItem
 import com.yogadarma.watchmovie.ui.screen.navigation.Screen
-import com.yogadarma.watchmovie.ui.screen.profile.ProfileScreen
 import com.yogadarma.watchmovie.ui.screen.splash.SplashScreen
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
@@ -45,7 +45,7 @@ fun WatchMovieApp(
     Scaffold(
         bottomBar = {
             when (currentRoute) {
-                Screen.Home.route, Screen.Favorite.route, Screen.Profile.route -> {
+                Screen.Home.route, Screen.Favorite.route, Screen.About.route -> {
                     BottomNavigationBar(navController = navController)
                 }
             }
@@ -81,8 +81,8 @@ fun WatchMovieApp(
                     }
                 )
             }
-            composable(Screen.Profile.route) {
-                ProfileScreen()
+            composable(Screen.About.route) {
+                AboutScreen()
             }
             composable(
                 route = Screen.Detail.route,
@@ -121,17 +121,20 @@ private fun BottomNavigationBar(
         NavigationItem(
             title = stringResource(R.string.title_movie),
             icon = Icons.Default.Home,
+            contentDescription = stringResource(id = R.string.movie_description),
             screen = Screen.Home
         ),
         NavigationItem(
             title = stringResource(R.string.title_favorite),
             icon = Icons.Default.Favorite,
+            contentDescription = stringResource(id = R.string.favorite_description),
             screen = Screen.Favorite
         ),
         NavigationItem(
-            title = stringResource(R.string.title_profile),
+            title = stringResource(R.string.title_about),
             icon = Icons.Default.AccountCircle,
-            screen = Screen.Profile
+            contentDescription = stringResource(id = R.string.about_description),
+            screen = Screen.About
         ),
     )
     BottomNavigation(
@@ -144,7 +147,7 @@ private fun BottomNavigationBar(
                 icon = {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = item.title
+                        contentDescription = item.contentDescription
                     )
                 },
                 label = { Text(item.title) },

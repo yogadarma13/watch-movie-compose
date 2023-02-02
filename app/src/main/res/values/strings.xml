@@ -2,8 +2,11 @@
     <string name="app_name">Watch Movie</string>
     <string name="icon_splash_description">Icon Application</string>
     <string name="title_movie">Movie</string>
+    <string name="movie_description">movie_page</string>
     <string name="title_favorite">Favorite</string>
-    <string name="title_profile">Profile</string>
+    <string name="favorite_description">favorite_page</string>
+    <string name="title_about">About</string>
+    <string name="about_description">about_page</string>
     <string name="back_button_description">Back button</string>
     <string name="movie_poster_description">Movie poster</string>
     <string name="label_synopsis">Synopsis</string>
@@ -11,4 +14,8 @@
     <string name="empty_favorite_data">Favorite data is empty</string>
     <string name="empty_description">Data is empty</string>
     <string name="favorite_button_description">Favorite Button</string>
+    <string name="image_about_description">Developer Image</string>
+    <string name="developer_name">I Kadek Yoga Darma Putra</string>
+    <string name="developer_email">kadekyoga125@gmail.com</string>
+    <string name="label_copyright">Copyright &#169; Watch Movie</string>
 </resources>

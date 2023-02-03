@@ -12,7 +12,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -33,15 +34,9 @@ fun DetailScreen(
     movie: Movie? = null,
     navigateBack: () -> Unit = {}
 ) {
-    var favorite by remember { mutableStateOf(false) }
+    val favorite by viewModel.favorite
 
     viewModel.checkFavoriteById(movie?.movieId ?: 0)
-
-    LaunchedEffect(true) {
-        viewModel.favState.collect {
-            favorite = it
-        }
-    }
 
     Box(
         modifier = modifier
@@ -90,7 +85,7 @@ fun DetailScreen(
                         if (favorite) viewModel.deleteFavorite(it.movieId)
                         else viewModel.insertFavorite(it)
 
-                        favorite = !favorite
+                        viewModel.updateFavorite(!favorite)
                     }
                 }
             ) {

@@ -42,6 +42,13 @@ fun WatchMovieApp(
     val currentRoute = navBackStackEntry?.destination?.route
 
     Scaffold(
+        topBar = {
+            when (currentRoute) {
+                Screen.Home.route, Screen.Favorite.route, Screen.About.route -> {
+                    TopBar(screen = currentRoute)
+                }
+            }
+        },
         bottomBar = {
             when (currentRoute) {
                 Screen.Home.route, Screen.Favorite.route, Screen.About.route -> {
@@ -106,6 +113,13 @@ fun WatchMovieApp(
             }
         }
     }
+}
+
+@Composable
+fun TopBar(modifier: Modifier = Modifier, screen: String) {
+    TopAppBar(modifier = modifier, title = {
+        Text(text = screen)
+    })
 }
 
 @Composable

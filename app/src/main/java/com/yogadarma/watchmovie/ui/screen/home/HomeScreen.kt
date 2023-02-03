@@ -2,6 +2,8 @@ package com.yogadarma.watchmovie.ui.screen.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -17,6 +19,7 @@ import com.yogadarma.watchmovie.common.UiState
 import com.yogadarma.watchmovie.ui.component.CircularProgress
 import com.yogadarma.watchmovie.ui.component.ErrorContent
 import com.yogadarma.watchmovie.ui.component.ItemMovieGrid
+import com.yogadarma.watchmovie.ui.component.SearchBar
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
@@ -25,24 +28,28 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     navigateToDetail: (Movie) -> Unit = {}
 ) {
-    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { state ->
-        when (state) {
-            is UiState.Loading -> {
-                viewModel.getPopularMovie()
-                CircularProgress()
-            }
-            is UiState.Success -> {
-                HomeContent(
-                    modifier = modifier,
-                    movies = state.data,
-                    navigateToDetail = navigateToDetail
-                )
-            }
-            is UiState.Error -> {
-                ErrorContent(errorMessage = state.errorMessage)
+    Column(modifier = modifier.fillMaxSize()) {
+        SearchBar(inputCallback = { keyword ->
+            viewModel.searchMovie(keyword)
+        })
+        viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    CircularProgress()
+                }
+                is UiState.Success -> {
+                    HomeContent(
+                        movies = state.data,
+                        navigateToDetail = navigateToDetail
+                    )
+                }
+                is UiState.Error -> {
+                    ErrorContent(errorMessage = state.errorMessage)
+                }
             }
         }
     }
+
 }
 
 @Composable

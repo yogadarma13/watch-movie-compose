@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -154,8 +153,7 @@ private fun BottomNavigationBar(
                 selected = currentRoute == item.screen.route,
                 onClick = {
                     navController.navigate(item.screen.route) {
-                        navController.popBackStack()
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(Screen.Home.route) {
                             saveState = true
                         }
                         restoreState = true

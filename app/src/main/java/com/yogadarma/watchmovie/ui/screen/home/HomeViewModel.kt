@@ -22,11 +22,18 @@ class HomeViewModel @Inject constructor(
     val uiState: StateFlow<UiState<List<Movie>>>
         get() = _uiState
 
-    fun getPopularMovie() {
+    private val movies = arrayListOf<Movie>()
+
+    init {
+        getPopularMovie()
+    }
+
+    private fun getPopularMovie() {
         viewModelScope.launch {
             getPopularMovieUseCase.invoke().collect { response ->
                 when (response) {
                     is Resource.Success -> {
+                        movies.addAll(response.data.orEmpty())
                         _uiState.value = UiState.Success(response.data.orEmpty())
                     }
                     is Resource.Error -> {
@@ -34,6 +41,15 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun searchMovie(keyword: String) {
+        if (keyword.isNotBlank()) {
+            val result = movies.filter { it.title.contains(keyword, ignoreCase = true) }
+            _uiState.value = UiState.Success(result)
+        } else {
+            _uiState.value = UiState.Success(movies)
         }
     }
 }

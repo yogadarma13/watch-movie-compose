@@ -18,4 +18,6 @@
     <string name="developer_name">I Kadek Yoga Darma Putra</string>
     <string name="developer_email">kadekyoga125@gmail.com</string>
     <string name="label_copyright">Copyright &#169; Watch Movie</string>
+    <string name="search_description">Search movie title</string>
+    <string name="placeholder_search">Search Movie Title</string>
 </resources>

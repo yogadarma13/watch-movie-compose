@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,10 +29,10 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     navigateToDetail: (Movie) -> Unit = {}
 ) {
+    val query by viewModel.query
+
     Column(modifier = modifier.fillMaxSize()) {
-        SearchBar(inputCallback = { keyword ->
-            viewModel.searchMovie(keyword)
-        })
+        SearchBar(query = query, onValueChange = viewModel::searchMovie)
         viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { state ->
             when (state) {
                 is UiState.Loading -> {

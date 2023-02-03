@@ -11,10 +11,6 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -25,8 +21,7 @@ import com.yogadarma.watchmovie.R
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
-fun SearchBar(modifier: Modifier = Modifier, inputCallback: (String) -> Unit = {}) {
-    var input by rememberSaveable { mutableStateOf("") }
+fun SearchBar(modifier: Modifier = Modifier, query: String, onValueChange: (String) -> Unit = {}) {
 
     OutlinedTextField(
         modifier = modifier
@@ -40,11 +35,8 @@ fun SearchBar(modifier: Modifier = Modifier, inputCallback: (String) -> Unit = {
             focusedBorderColor = colorResource(id = R.color.red),
             unfocusedBorderColor = Color.Transparent,
         ),
-        value = input,
-        onValueChange = {
-            input = it
-            inputCallback(it)
-        },
+        value = query,
+        onValueChange = onValueChange,
         placeholder = {
             Text(text = stringResource(id = R.string.placeholder_search))
         },
@@ -61,6 +53,6 @@ fun SearchBar(modifier: Modifier = Modifier, inputCallback: (String) -> Unit = {
 @Composable
 fun SearchBarPreview() {
     WatchMovieTheme {
-        SearchBar()
+        SearchBar(query = "")
     }
 }

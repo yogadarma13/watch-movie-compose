@@ -1,5 +1,7 @@
 package com.yogadarma.watchmovie.ui.screen.home
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yogadarma.core.data.Resource
@@ -16,6 +18,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getPopularMovieUseCase: GetPopularMovieUseCase
 ) : ViewModel() {
+
+    private val _query = mutableStateOf("")
+    val query: State<String> get() = _query
 
     private val _uiState: MutableStateFlow<UiState<List<Movie>>> =
         MutableStateFlow(UiState.Loading)
@@ -44,9 +49,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun searchMovie(keyword: String) {
-        if (keyword.isNotBlank()) {
-            val result = movies.filter { it.title.contains(keyword, ignoreCase = true) }
+    fun searchMovie(query: String) {
+        _query.value = query
+        if (query.isNotBlank()) {
+            val result = movies.filter { it.title.contains(query, ignoreCase = true) }
             _uiState.value = UiState.Success(result)
         } else {
             _uiState.value = UiState.Success(movies)

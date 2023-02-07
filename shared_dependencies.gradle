@@ -3,6 +3,7 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    implementation "androidx.test.espresso:espresso-idling-resource:3.5.1"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"

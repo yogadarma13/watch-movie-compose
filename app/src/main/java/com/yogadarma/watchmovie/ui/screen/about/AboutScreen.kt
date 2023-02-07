@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -34,13 +35,15 @@ fun AboutScreen(
         Image(
             modifier = Modifier
                 .size(150.dp)
-                .clip(shape = CircleShape),
+                .clip(shape = CircleShape)
+                .testTag("DeveloperImage"),
             painter = painterResource(id = R.drawable.img_developer),
             contentDescription = stringResource(id = R.string.image_about_description),
             contentScale = ContentScale.Crop
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
+            modifier = Modifier.testTag("DeveloperName"),
             text = stringResource(id = R.string.developer_name),
             style = MaterialTheme.typography.h6.copy(
                 fontWeight = FontWeight.Bold
@@ -48,13 +51,14 @@ fun AboutScreen(
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
+            modifier = Modifier.testTag("DeveloperEmail"),
             text = stringResource(id = R.string.developer_email),
             style = MaterialTheme.typography.subtitle1,
             fontStyle = FontStyle.Italic
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
-            modifier = Modifier.padding(bottom = 16.dp),
+            modifier = Modifier.padding(bottom = 16.dp).testTag("CopyrightLabel"),
             text = stringResource(id = R.string.label_copyright),
             style = TextStyle(fontSize = 12.sp)
         )

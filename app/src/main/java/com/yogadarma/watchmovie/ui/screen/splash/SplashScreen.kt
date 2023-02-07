@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -24,7 +25,8 @@ fun SplashScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(color = colorResource(id = R.color.red)),
+            .background(color = colorResource(id = R.color.red))
+            .testTag("SplashScreenPage"),
         contentAlignment = Alignment.Center
     ) {
         Image(

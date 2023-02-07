@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -61,10 +62,10 @@ fun HomeContent(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
-    LazyVerticalGrid(modifier = modifier, columns = GridCells.Adaptive(150.dp)) {
+    LazyVerticalGrid(modifier = modifier.testTag("MovieList"), columns = GridCells.Adaptive(150.dp)) {
         items(movies) { data ->
             ItemMovieGrid(
-                modifier = Modifier.clickable(
+                modifier = Modifier.testTag("MovieItem").clickable(
                     interactionSource = interactionSource,
                     indication = null
                 ) { navigateToDetail(data) },

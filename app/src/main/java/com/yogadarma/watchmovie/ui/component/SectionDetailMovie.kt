@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,6 +33,7 @@ fun SectionDetailMovie(
             drawablePadding = 8.dp
         ) {
             Text(
+                modifier = Modifier.testTag("MovieRating"),
                 text = rating,
                 style = MaterialTheme.typography.h6,
             )
@@ -39,6 +41,7 @@ fun SectionDetailMovie(
         Spacer(modifier = Modifier.height(8.dp))
         DrawableStartWrapper(drawable = R.drawable.ic_date, drawablePadding = 8.dp) {
             Text(
+                modifier = Modifier.testTag("MovieReleaseDate"),
                 text = releaseDate.formatDate(
                     BuildConfig.FORMAT_DATE1,
                     BuildConfig.FORMAT_DATE3
@@ -47,6 +50,7 @@ fun SectionDetailMovie(
         }
         Spacer(modifier = Modifier.height(16.dp))
         Text(
+            modifier = Modifier.testTag("MovieSynopsisLabel"),
             text = stringResource(id = R.string.label_synopsis),
             style = MaterialTheme.typography.h6.copy(
                 fontWeight = FontWeight.Bold
@@ -56,7 +60,8 @@ fun SectionDetailMovie(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(end = 16.dp),
+                .padding(end = 16.dp)
+                .testTag("MovieSynopsis"),
             text = synopsis
         )
     }

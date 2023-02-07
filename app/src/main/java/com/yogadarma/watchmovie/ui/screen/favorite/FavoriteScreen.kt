@@ -55,7 +55,7 @@ fun FavoriteContent(
         modifier = modifier.testTag("FavoriteList"),
         contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp)
     ) {
-        items(movies) { data ->
+        items(movies, key = { it.movieId }) { data ->
             ItemMovieVertical(
                 modifier = Modifier
                     .fillMaxWidth()

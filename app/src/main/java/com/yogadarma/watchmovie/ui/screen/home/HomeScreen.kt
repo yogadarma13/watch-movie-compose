@@ -62,13 +62,18 @@ fun HomeContent(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
-    LazyVerticalGrid(modifier = modifier.testTag("MovieList"), columns = GridCells.Adaptive(150.dp)) {
-        items(movies) { data ->
+    LazyVerticalGrid(
+        modifier = modifier.testTag("MovieList"),
+        columns = GridCells.Adaptive(150.dp)
+    ) {
+        items(movies, key = { it.movieId }) { data ->
             ItemMovieGrid(
-                modifier = Modifier.testTag("MovieItem").clickable(
-                    interactionSource = interactionSource,
-                    indication = null
-                ) { navigateToDetail(data) },
+                modifier = Modifier
+                    .testTag("MovieItem")
+                    .clickable(
+                        interactionSource = interactionSource,
+                        indication = null
+                    ) { navigateToDetail(data) },
                 image = data.image,
                 title = data.title,
                 releaseDate = data.releaseDate

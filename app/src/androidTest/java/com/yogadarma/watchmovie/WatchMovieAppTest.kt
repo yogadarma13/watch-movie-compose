@@ -2,8 +2,6 @@ package com.yogadarma.watchmovie
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.test.espresso.IdlingRegistry
-import com.yogadarma.core.utils.EspressoIdlingResource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.*
@@ -19,15 +17,8 @@ class WatchMovieAppTest {
     @get:Rule(order = 1)
     val composeTestRule = createAndroidComposeRule(MainActivity::class.java)
 
-    @After
-    fun tearDown() {
-        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.espressoTestIdlingResource)
-    }
-
     @Before
     fun setUp() {
-        IdlingRegistry.getInstance().register(EspressoIdlingResource.espressoTestIdlingResource)
-
         hiltRule.inject()
     }
 

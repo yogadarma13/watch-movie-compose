@@ -24,6 +24,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class HomeViewModelTest {
+
     private val dummyMovieList = DummyData().getDummyMovieList()
     private val expectedErrorMessage = "Error Response"
 
@@ -41,7 +42,6 @@ class HomeViewModelTest {
 
     @Test
     fun testGetPopularMovie_returnMovieList() = runTest {
-
         val dummyFlow = flow<Resource<List<Movie>>> { emit(Resource.Success(dummyMovieList)) }
 
         `when`(mockUseCase.invoke()).thenReturn(dummyFlow)

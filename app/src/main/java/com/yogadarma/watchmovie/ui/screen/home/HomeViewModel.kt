@@ -8,15 +8,19 @@ import com.yogadarma.core.data.Resource
 import com.yogadarma.core.domain.model.Movie
 import com.yogadarma.core.domain.usecases.GetPopularMovieUseCase
 import com.yogadarma.watchmovie.common.UiState
+import com.yogadarma.watchmovie.utils.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getPopularMovieUseCase: GetPopularMovieUseCase
+    private val getPopularMovieUseCase: GetPopularMovieUseCase,
+    private val dispatcher: Dispatcher
 ) : ViewModel() {
 
     private val _query = mutableStateOf("")
@@ -33,19 +37,23 @@ class HomeViewModel @Inject constructor(
         getPopularMovie()
     }
 
-    private fun getPopularMovie() {
-        viewModelScope.launch {
-            getPopularMovieUseCase.invoke().collect { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        movies.addAll(response.data.orEmpty())
-                        _uiState.value = UiState.Success(response.data.orEmpty())
-                    }
-                    is Resource.Error -> {
-                        _uiState.value = UiState.Error(response.message.toString())
+    fun getPopularMovie() {
+        viewModelScope.launch(dispatcher.main) {
+            getPopularMovieUseCase.invoke()
+                .flowOn(dispatcher.io)
+                .catch { e ->
+                    _uiState.value = UiState.Error(e.toString())
+                }.collect { response ->
+                    when (response) {
+                        is Resource.Success -> {
+                            movies.addAll(response.data.orEmpty())
+                            _uiState.value = UiState.Success(response.data.orEmpty())
+                        }
+                        is Resource.Error -> {
+                            _uiState.value = UiState.Error(response.message.toString())
+                        }
                     }
                 }
-            }
         }
     }
 

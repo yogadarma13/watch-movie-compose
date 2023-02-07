@@ -76,4 +76,23 @@ class HomeViewModelTest {
             cancelAndIgnoreRemainingEvents()
         }
     }
+
+    @Test
+    fun testSearchMovie_returnMovie2() = runTest {
+        val dummyFlow = flow<Resource<List<Movie>>> { emit(Resource.Success(dummyMovieList)) }
+
+        `when`(mockUseCase.invoke()).thenReturn(dummyFlow)
+
+        homeViewModel.getPopularMovie()
+        homeViewModel.searchMovie("Movie 2")
+
+        homeViewModel.uiState.test {
+            awaitItem().let {
+                assertTrue(it is UiState.Success)
+                assertEquals(UiState.Success(listOf(dummyMovieList[1])), it)
+                assertEquals(dummyMovieList[1], (it as UiState.Success).data[0])
+            }
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
 }

@@ -75,10 +75,7 @@ fun DetailScreen(
                 contentDescription = stringResource(id = R.string.favorite_button_description),
                 onClickCallback = {
                     movie?.let {
-                        if (favorite) viewModel.deleteFavorite(it.movieId)
-                        else viewModel.insertFavorite(it)
-
-                        viewModel.updateFavorite(!favorite)
+                        viewModel.updateFavorite(it)
                     }
                 }
             )

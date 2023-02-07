@@ -22,19 +22,22 @@ class DetailViewModel @Inject constructor(
     private val _favorite = mutableStateOf(false)
     val favorite: State<Boolean> get() = _favorite
 
-    fun insertFavorite(movie: Movie) = viewModelScope.launch {
-        insertFavoriteUseCase.invoke(movie)
-    }
-
     fun checkFavoriteById(movieId: Int) = viewModelScope.launch {
         _favorite.value = checkFavoriteUseCase.invoke(movieId) >= 1
     }
 
-    fun deleteFavorite(movieId: Int) = viewModelScope.launch {
+    private fun insertFavorite(movie: Movie) = viewModelScope.launch {
+        insertFavoriteUseCase.invoke(movie)
+    }
+
+    private fun deleteFavorite(movieId: Int) = viewModelScope.launch {
         deleteFavoriteUseCase.invoke(movieId)
     }
 
-    fun updateFavorite(favorite: Boolean) {
-        _favorite.value = favorite
+    fun updateFavorite(movie: Movie) {
+        if (_favorite.value) deleteFavorite(movie.movieId)
+        else insertFavorite(movie)
+
+        _favorite.value = !_favorite.value
     }
 }

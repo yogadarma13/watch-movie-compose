@@ -13,6 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,11 +24,11 @@ import org.mockito.junit.MockitoJUnitRunner
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class HomeViewModelTest {
+    private val dummyMovieList = DummyData().getDummyMovieList()
+    private val expectedErrorMessage = "Error Response"
 
     @Mock
     lateinit var mockUseCase: GetPopularMovieUseCase
-
-    private val dummyMovieList = DummyData().getDummyMovieList()
 
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var dispatcher: Dispatcher
@@ -49,8 +50,28 @@ class HomeViewModelTest {
 
         homeViewModel.uiState.test {
             awaitItem().let {
+                assertTrue(it is UiState.Success)
                 assertEquals(UiState.Success(dummyMovieList), it)
-                assertEquals((it as UiState.Success).data, dummyMovieList)
+                assertEquals(dummyMovieList, (it as UiState.Success).data)
+            }
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun testGetPopularMovie_returnErrorMessage() = runTest {
+        val errorDummyFlow =
+            flow<Resource<List<Movie>>> { emit(Resource.Error(expectedErrorMessage)) }
+
+        `when`(mockUseCase.invoke()).thenReturn(errorDummyFlow)
+
+        homeViewModel.getPopularMovie()
+
+        homeViewModel.uiState.test {
+            awaitItem().let {
+                assertTrue(it is UiState.Error)
+                assertEquals(UiState.Error(expectedErrorMessage), it)
+                assertEquals(expectedErrorMessage, (it as UiState.Error).errorMessage)
             }
             cancelAndIgnoreRemainingEvents()
         }

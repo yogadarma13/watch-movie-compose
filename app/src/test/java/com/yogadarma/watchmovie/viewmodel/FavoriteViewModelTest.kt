@@ -22,7 +22,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class FavoriteViewModelTest {
 
-    private val dummyMovieList = DummyData().getDummyMovieList()
+    private val dummyMovieList = DummyData.getDummyMovieList()
 
     @Mock
     lateinit var mockUseCase: GetFavoriteUseCase

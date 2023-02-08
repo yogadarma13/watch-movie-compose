@@ -31,9 +31,9 @@ class WatchMovieAppTest {
     fun test2_navHost_checkMovieListIsDisplayed() {
         composeTestRule.run {
             waitUntil(10000L) {
-                composeTestRule.onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
+                onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
             }
-            composeTestRule.onNodeWithTag("MovieList").assertIsDisplayed()
+            onNodeWithTag("MovieList").assertIsDisplayed()
             onNodeWithTag("MovieList").performScrollToIndex(10)
         }
     }
@@ -42,7 +42,7 @@ class WatchMovieAppTest {
     fun test3_navHost_clickMovieItem_navigateToDetailScreen() {
         composeTestRule.run {
             waitUntil(10000L) {
-                composeTestRule.onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
+                onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
             }
             onNodeWithTag("MovieList").performScrollToIndex(10)
             onAllNodesWithTag("MovieItem").onFirst().performClick()
@@ -59,7 +59,7 @@ class WatchMovieAppTest {
     fun test4_navHost_clickFavoriteButton_addAndDeleteFavorite() {
         composeTestRule.run {
             waitUntil(10000L) {
-                composeTestRule.onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
+                onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
             }
             onNodeWithTag("MovieList").performScrollToIndex(10)
             onAllNodesWithTag("MovieItem").onFirst().performClick()
@@ -84,7 +84,7 @@ class WatchMovieAppTest {
     fun test5_navHost_clickAboutTab_displayAboutPage() {
         composeTestRule.run {
             waitUntil(10000L) {
-                composeTestRule.onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
+                onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
             }
             onNodeWithText("About").performClick()
             onNodeWithTag("DeveloperImage").assertIsDisplayed()

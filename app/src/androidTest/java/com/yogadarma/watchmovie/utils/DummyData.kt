@@ -3,7 +3,6 @@ package com.yogadarma.watchmovie.utils
 import com.yogadarma.core.domain.model.Movie
 
 object DummyData {
-
     fun getDummyMovieList() = listOf(
         Movie(
             movieId = 1,

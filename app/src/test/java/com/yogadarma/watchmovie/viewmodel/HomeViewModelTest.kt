@@ -25,7 +25,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class HomeViewModelTest {
 
-    private val dummyMovieList = DummyData().getDummyMovieList()
+    private val dummyMovieList = DummyData.getDummyMovieList()
     private val expectedErrorMessage = "Error Response"
 
     @Mock

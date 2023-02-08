@@ -43,7 +43,7 @@ fun SectionPosterMovie(modifier: Modifier = Modifier, image: String, title: Stri
                     brush = Brush.verticalGradient(
                         colors = listOf(
                             Color.Transparent,
-                            Color.White
+                            MaterialTheme.colors.background
                         )
                     )
                 )

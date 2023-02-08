@@ -11,8 +11,9 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -117,9 +118,13 @@ fun WatchMovieApp(
 
 @Composable
 fun TopBar(modifier: Modifier = Modifier, screen: String) {
-    TopAppBar(modifier = modifier, title = {
-        Text(text = screen)
-    })
+    TopAppBar(
+        modifier = modifier,
+        backgroundColor = MaterialTheme.colors.primary,
+        title = {
+            Text(text = screen)
+        }
+    )
 }
 
 @Composable
@@ -152,11 +157,14 @@ private fun BottomNavigationBar(
     )
     BottomNavigation(
         modifier = modifier,
-        backgroundColor = Color.White,
+        backgroundColor = MaterialTheme.colors.background,
         contentColor = MaterialTheme.colors.primary
     ) {
         navigationItems.map { item ->
             BottomNavigationItem(
+                modifier = Modifier.semantics(mergeDescendants = true) {
+                    contentDescription = item.contentDescription
+                },
                 icon = {
                     Icon(
                         imageVector = item.icon,

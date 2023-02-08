@@ -58,7 +58,9 @@ fun AboutScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
-            modifier = Modifier.padding(bottom = 16.dp).testTag("CopyrightLabel"),
+            modifier = Modifier
+                .padding(bottom = 16.dp)
+                .testTag("CopyrightLabel"),
             text = stringResource(id = R.string.label_copyright),
             style = TextStyle(fontSize = 12.sp)
         )

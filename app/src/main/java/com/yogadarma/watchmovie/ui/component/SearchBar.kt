@@ -4,10 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
@@ -22,7 +19,6 @@ import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
 fun SearchBar(modifier: Modifier = Modifier, query: String, onValueChange: (String) -> Unit = {}) {
-
     OutlinedTextField(
         modifier = modifier
             .padding(16.dp)
@@ -30,7 +26,7 @@ fun SearchBar(modifier: Modifier = Modifier, query: String, onValueChange: (Stri
             .heightIn(min = 40.dp),
         shape = RoundedCornerShape(10.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            backgroundColor = colorResource(id = R.color.light_gray),
+            backgroundColor = MaterialTheme.colors.secondary,
             disabledBorderColor = Color.Transparent,
             focusedBorderColor = colorResource(id = R.color.red),
             unfocusedBorderColor = Color.Transparent,

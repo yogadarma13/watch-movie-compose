@@ -1,8 +1,8 @@
 package com.yogadarma.watchmovie.di
 
 import com.yogadarma.core.domain.usecases.*
-import com.yogadarma.watchmovie.utils.DispatcherProvider
 import com.yogadarma.watchmovie.utils.Dispatcher
+import com.yogadarma.watchmovie.utils.DispatcherProvider
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

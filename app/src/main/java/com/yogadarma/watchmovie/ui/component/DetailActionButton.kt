@@ -5,15 +5,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.yogadarma.watchmovie.R
 
 @Composable
 fun DetailActionButton(
@@ -24,7 +20,7 @@ fun DetailActionButton(
 ) {
     IconButton(
         modifier = modifier
-            .background(shape = CircleShape, color = colorResource(id = R.color.white_50))
+            .background(shape = CircleShape, color = MaterialTheme.colors.secondaryVariant)
             .size(40.dp),
         onClick = onClickCallback
     ) {

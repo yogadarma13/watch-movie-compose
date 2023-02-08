@@ -93,4 +93,15 @@ class WatchMovieAppTest {
             onNodeWithTag("CopyrightLabel").assertIsDisplayed()
         }
     }
+
+    @Test
+    fun test6_navHost_searchMovieWithRandomText_showEmptyContent() {
+        composeTestRule.run {
+            waitUntil(10000L) {
+                onAllNodesWithTag("MovieList").fetchSemanticsNodes().size == 1
+            }
+            onNodeWithTag("SearchBar").performTextInput("random text")
+            onNodeWithTag("EmptyContent").assertIsDisplayed()
+        }
+    }
 }

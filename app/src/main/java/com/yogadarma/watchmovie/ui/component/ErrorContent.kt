@@ -28,7 +28,7 @@ fun ErrorContent(modifier: Modifier = Modifier, errorMessage: String) {
             contentDescription = stringResource(id = R.string.error_description)
         )
         Text(
-            modifier = modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = 16.dp),
             text = errorMessage,
             style = MaterialTheme.typography.subtitle1,
             textAlign = TextAlign.Center

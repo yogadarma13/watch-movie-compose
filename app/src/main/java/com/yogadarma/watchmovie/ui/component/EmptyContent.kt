@@ -19,17 +19,23 @@ import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 @Composable
 fun EmptyContent(modifier: Modifier = Modifier, message: String) {
     Column(
-        modifier = modifier.fillMaxSize().testTag("EmptyContent"),
+        modifier = modifier
+            .fillMaxSize()
+            .testTag("EmptyContent"),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            modifier = Modifier.width(250.dp),
+            modifier = Modifier
+                .width(250.dp)
+                .testTag("EmptyImage"),
             painter = painterResource(id = R.drawable.ic_empty),
             contentDescription = stringResource(id = R.string.empty_description)
         )
         Text(
-            modifier = modifier.padding(horizontal = 16.dp),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .testTag("EmptyMessage"),
             text = message,
             style = MaterialTheme.typography.subtitle1,
             textAlign = TextAlign.Center

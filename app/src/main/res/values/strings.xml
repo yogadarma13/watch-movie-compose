@@ -12,6 +12,7 @@
     <string name="label_synopsis">Synopsis</string>
     <string name="error_description">Error</string>
     <string name="empty_favorite_data">Favorite data is empty</string>
+    <string name="data_not_found">Data not found</string>
     <string name="empty_description">Data is empty</string>
     <string name="favorite_button_description">Favorite Button</string>
     <string name="image_about_description">Developer Image</string>

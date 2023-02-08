@@ -13,15 +13,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yogadarma.core.domain.model.Movie
+import com.yogadarma.watchmovie.R
 import com.yogadarma.watchmovie.common.UiState
-import com.yogadarma.watchmovie.ui.component.CircularProgress
-import com.yogadarma.watchmovie.ui.component.ErrorContent
-import com.yogadarma.watchmovie.ui.component.ItemMovieGrid
-import com.yogadarma.watchmovie.ui.component.SearchBar
+import com.yogadarma.watchmovie.ui.component.*
 import com.yogadarma.watchmovie.ui.theme.WatchMovieTheme
 
 @Composable
@@ -40,10 +39,13 @@ fun HomeScreen(
                     CircularProgress()
                 }
                 is UiState.Success -> {
-                    HomeContent(
-                        movies = state.data,
-                        navigateToDetail = navigateToDetail
-                    )
+                    if (state.data.isNotEmpty())
+                        HomeContent(
+                            movies = state.data,
+                            navigateToDetail = navigateToDetail
+                        )
+                    else
+                        EmptyContent(message = stringResource(id = R.string.data_not_found))
                 }
                 is UiState.Error -> {
                     ErrorContent(errorMessage = state.errorMessage)

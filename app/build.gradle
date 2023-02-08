@@ -18,7 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "com.yogadarma.watchmovie.HiltTestRunner"
+        testInstrumentationRunner "com.yogadarma.watchmovie.utils.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }

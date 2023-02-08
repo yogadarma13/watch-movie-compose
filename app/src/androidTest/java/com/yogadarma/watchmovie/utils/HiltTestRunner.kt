@@ -1,4 +1,4 @@
-package com.yogadarma.watchmovie
+package com.yogadarma.watchmovie.utils
 
 import android.app.Application
 import android.content.Context
